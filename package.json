@@ -1,7 +1,7 @@
 {
   "name": "@tsdotnet/array-copy",
   "version": "1.0.1",
-  "description": "",
+  "description": "A commonly used array copy utility. (arrayCopy and arrayCopyTo)",
   "author": "electricessence",
   "license": "MIT",
   "types": "dist/arrayCopy.d.ts",
