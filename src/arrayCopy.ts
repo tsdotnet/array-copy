@@ -26,7 +26,7 @@ const
  * @param destination
  * @param sourceIndex
  * @param destinationIndex
- * @param length An optional limit to stop copying.
+ * @param count An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
  * @returns The destination array.
  */
 export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
@@ -34,15 +34,16 @@ export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
 	destination: TDestination,
 	sourceIndex: number      = 0,
 	destinationIndex: number = 0,
-	length: number           = Infinity
+	count: number            = Infinity
 ): TDestination
 {
 	if(!source) throw new ArgumentNullException('source', CBN);
 	if(!destination) throw new ArgumentNullException('destination', CBN);
 	if(sourceIndex<0) throw new ArgumentOutOfRangeException('sourceIndex', sourceIndex, CBL0);
+	if(destinationIndex<0) throw new ArgumentOutOfRangeException('destinationIndex', destinationIndex, CBL0);
 
 	const sourceLength = source.length;
-	if(!sourceLength) return destination;
+	if(!sourceLength || count<1) return destination;
 	if(sourceIndex>=sourceLength)
 		throw new ArgumentOutOfRangeException(
 			'sourceIndex',
@@ -50,21 +51,22 @@ export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
 			'Must be less than the length of the source array.'
 		);
 
-	if(destination.length<0) throw new ArgumentOutOfRangeException('destinationIndex', destinationIndex, CBL0);
+	// deal with ArrayLike issues.
+	if(destination.length<0) throw new ArgumentOutOfRangeException('destination.length', destination.length, CBL0);
 
-	const maxLength = source.length - sourceIndex;
-	if(isFinite(length) && length>maxLength)
+	const max = source.length - sourceIndex;
+	if(isFinite(count) && count>max)
 		throw new ArgumentOutOfRangeException(
 			'sourceIndex',
 			sourceIndex,
 			'Source index + length cannot exceed the length of the source array.'
 		);
 
-	length = Math.min(length, maxLength);
-	const newLength = destinationIndex + length;
+	count = Math.min(count, max);
+	const newLength = destinationIndex + count;
 	if(newLength>destination.length) destination.length = newLength;
 
-	for(let i = 0; i<length; i++)
+	for(let i = 0; i<count; i++)
 	{
 		destination[destinationIndex + i] = source[sourceIndex + i];
 	}
@@ -78,21 +80,21 @@ export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
  * Similar to Array.slice(index, length).
  * @param source
  * @param sourceIndex
- * @param length
- * @returns {any}
+ * @param count An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
+ * @returns The copy of the source array.
  */
 function arrayCopy<T> (
 	source: ArrayLike<T>,
 	sourceIndex: number = 0,
-	length: number      = Infinity): T[]
+	count: number       = Infinity): T[]
 {
 	if(!source) return source as any; // may have passed zero? undefined? or null?
 	return arrayCopyTo(
 		source,
-		arrayInit<T>(Math.min(length, Math.max(source.length - sourceIndex, 0))),
+		arrayInit<T>(Math.min(count, Math.max(source.length - sourceIndex, 0))),
 		sourceIndex,
 		0,
-		length
+		count
 	);
 }
 

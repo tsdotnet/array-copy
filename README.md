@@ -6,5 +6,63 @@
 
 A commonly used array copy utility.
 
-Includes `arrayCopy<T>` and `arrayCopyTo<T>`.
+## Usage
 
+```typescript
+import arrayCopy, {arrayCopyTo} from '@tsdotnet/array-copy'
+
+const myCopy = arrayCopy(source);
+// myCopy is really a shortcut for:
+const myOtherCopy = arrayCopyTo([]);
+```
+
+or
+
+```typescript
+import arrayCopy from '@tsdotnet/array-copy'
+
+const myOtherCopy = arrayCopy.to([]); // same as arrayCopyTo.
+```
+
+## Exported
+
+*For flexibility, these functions can operate on objects that have a length but are not instances of Array.* (`ArrayLikeWritable<T>`)
+
+### arrayCopyTo
+
+```typescript
+/**
+ * Copies one array to another.
+ * @param source
+ * @param destination
+ * @param sourceIndex
+ * @param destinationIndex
+ * @param count An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
+ * @returns The destination array.
+ */
+export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
+  source: ArrayLike<T>,
+  destination: TDestination,
+  sourceIndex: number      = 0,
+  destinationIndex: number = 0,
+  count: number           = Infinity
+): TDestination
+```
+
+### arrayCopy
+
+```typescript
+/**
+ * Creates a copy of the array-like object.
+ * Similar to Array.slice(index, length).
+ * @param source
+ * @param sourceIndex
+ * @param count An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
+ * @returns The copy of the source array.
+ */
+export default function arrayCopy<T> (
+  source: ArrayLike<T>,
+  sourceIndex: number = 0,
+  count: number      = Infinity
+): T[]
+```
