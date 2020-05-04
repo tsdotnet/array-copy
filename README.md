@@ -8,7 +8,7 @@ A commonly used array copy utility.
 
 ## Docs
 
-[tsdotnet.github.io/[package-name]](https://tsdotnet.github.io/[package-name]/)
+[tsdotnet.github.io/array-copy](https://tsdotnet.github.io/array-copy/)
 
 ## Usage
 
