@@ -56,6 +56,6 @@
   },
   "dependencies": {
     "@tsdotnet/array-init": "^1.0.7",
-    "@tsdotnet/exceptions": "^1.0.12"
+    "@tsdotnet/exceptions": "^1.0.13"
   }
 }
