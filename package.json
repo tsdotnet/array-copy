@@ -55,7 +55,7 @@
     "typescript": "^3.9.2"
   },
   "dependencies": {
-    "@tsdotnet/array-init": "^1.0.8",
+    "@tsdotnet/array-init": "^1.0.9",
     "@tsdotnet/exceptions": "^1.0.15",
     "tslib": "^2.0.0"
   }
