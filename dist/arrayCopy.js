@@ -79,6 +79,5 @@ function arrayCopy(source, sourceIndex = 0, count = Infinity) {
     }
     arrayCopy.to = to;
 })(arrayCopy || (arrayCopy = {}));
-// @ts-ignore
 exports.default = arrayCopy;
 //# sourceMappingURL=arrayCopy.js.map

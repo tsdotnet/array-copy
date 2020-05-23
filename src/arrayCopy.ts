@@ -3,9 +3,9 @@
  * Licensing: MIT
  */
 
+import arrayInit from '@tsdotnet/array-init';
 import ArgumentNullException from '@tsdotnet/exceptions/dist/ArgumentNullException';
 import ArgumentOutOfRangeException from '@tsdotnet/exceptions/dist/ArgumentOutOfRangeException';
-import arrayInit from '@tsdotnet/array-init';
 
 interface ArrayLikeWritable<T>
 {
@@ -122,5 +122,4 @@ namespace arrayCopy
 	}
 }
 
-// @ts-ignore
 export default arrayCopy;
