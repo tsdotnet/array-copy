@@ -2,9 +2,9 @@
  * @author electricessence / https://github.com/electricessence/
  * Licensing: MIT
  */
+import arrayInit from '@tsdotnet/array-init';
 import ArgumentNullException from '@tsdotnet/exceptions/dist/ArgumentNullException';
 import ArgumentOutOfRangeException from '@tsdotnet/exceptions/dist/ArgumentOutOfRangeException';
-import arrayInit from '@tsdotnet/array-init';
 /* eslint-disable no-inner-declarations */
 const CBN = 'Cannot be null.', CBL0 = 'Cannot be less than zero.';
 /**
