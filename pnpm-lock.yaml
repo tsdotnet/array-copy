@@ -1,6 +1,6 @@
 dependencies:
-  '@tsdotnet/array-init': 1.0.11
-  '@tsdotnet/exceptions': 1.0.17
+  '@tsdotnet/array-init': link:../array-init
+  '@tsdotnet/exceptions': link:../exceptions
   tslib: 2.2.0
 devDependencies:
   '@types/chai': 4.2.18
@@ -278,16 +278,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==
-  /@tsdotnet/array-init/1.0.11:
-    dev: false
-    resolution:
-      integrity: sha512-0/RSLZjMwPZ1bG2+R3LR7j68sfVIvBHEibnhaUXm+IchcxxmIeaHCvXMOctOfuDKkck5hK8XhX12Wh+ULiVRQA==
-  /@tsdotnet/exceptions/1.0.17:
-    dependencies:
-      tslib: 2.2.0
-    dev: false
-    resolution:
-      integrity: sha512-+xTpTdAy8+7F3k2KMjvds9UWpLbW+9Q6sLhOxfm7GvEsDKBugb9JYM5CoEKADOoR9+tLn8xT7qwTu+lcmnJ5LA==
   /@types/chai/4.2.18:
     dev: true
     resolution:
