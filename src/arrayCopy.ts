@@ -3,16 +3,10 @@
  * Licensing: MIT
  */
 
+import {ArrayLikeWritable} from '@tsdotnet/common-interfaces';
 import arrayInit from '@tsdotnet/array-init';
 import ArgumentNullException from '@tsdotnet/exceptions/dist/ArgumentNullException';
 import ArgumentOutOfRangeException from '@tsdotnet/exceptions/dist/ArgumentOutOfRangeException';
-
-interface ArrayLikeWritable<T>
-{
-	length: number;
-
-	[n: number]: T;
-}
 
 /* eslint-disable no-inner-declarations */
 

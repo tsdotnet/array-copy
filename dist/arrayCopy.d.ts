@@ -2,10 +2,7 @@
  * @author electricessence / https://github.com/electricessence/
  * Licensing: MIT
  */
-interface ArrayLikeWritable<T> {
-    length: number;
-    [n: number]: T;
-}
+import { ArrayLikeWritable } from '@tsdotnet/common-interfaces';
 /**
  * Copies one array to another.
  * @param source
