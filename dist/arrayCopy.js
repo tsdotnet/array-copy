@@ -6,9 +6,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.arrayCopyTo = void 0;
 const tslib_1 = require("tslib");
-const array_init_1 = tslib_1.__importDefault(require("@tsdotnet/array-init"));
-const ArgumentNullException_1 = tslib_1.__importDefault(require("@tsdotnet/exceptions/dist/ArgumentNullException"));
-const ArgumentOutOfRangeException_1 = tslib_1.__importDefault(require("@tsdotnet/exceptions/dist/ArgumentOutOfRangeException"));
+const array_init_1 = (0, tslib_1.__importDefault)(require("@tsdotnet/array-init"));
+const ArgumentNullException_1 = (0, tslib_1.__importDefault)(require("@tsdotnet/exceptions/dist/ArgumentNullException"));
+const ArgumentOutOfRangeException_1 = (0, tslib_1.__importDefault)(require("@tsdotnet/exceptions/dist/ArgumentOutOfRangeException"));
 /* eslint-disable no-inner-declarations */
 const CBN = 'Cannot be null.', CBL0 = 'Cannot be less than zero.';
 /**
@@ -61,7 +61,7 @@ exports.arrayCopyTo = arrayCopyTo;
 function arrayCopy(source, sourceIndex = 0, count = Infinity) {
     if (!source)
         return source; // may have passed zero? undefined? or null?
-    return arrayCopyTo(source, array_init_1.default(Math.min(count, Math.max(source.length - sourceIndex, 0))), sourceIndex, 0, count);
+    return arrayCopyTo(source, (0, array_init_1.default)(Math.min(count, Math.max(source.length - sourceIndex, 0))), sourceIndex, 0, count);
 }
 // eslint-disable-next-line @typescript-eslint/no-namespace
 (function (arrayCopy) {
