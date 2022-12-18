@@ -6,9 +6,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.arrayCopyTo = void 0;
 const tslib_1 = require("tslib");
-const array_init_1 = (0, tslib_1.__importDefault)(require("@tsdotnet/array-init"));
-const ArgumentNullException_1 = (0, tslib_1.__importDefault)(require("@tsdotnet/exceptions/dist/ArgumentNullException"));
-const ArgumentOutOfRangeException_1 = (0, tslib_1.__importDefault)(require("@tsdotnet/exceptions/dist/ArgumentOutOfRangeException"));
+const array_init_1 = tslib_1.__importDefault(require("@tsdotnet/array-init"));
+const ArgumentNullException_1 = tslib_1.__importDefault(require("@tsdotnet/exceptions/dist/ArgumentNullException"));
+const ArgumentOutOfRangeException_1 = tslib_1.__importDefault(require("@tsdotnet/exceptions/dist/ArgumentOutOfRangeException"));
 /* eslint-disable no-inner-declarations */
 const CBN = 'Cannot be null.', CBL0 = 'Cannot be less than zero.';
 /**
