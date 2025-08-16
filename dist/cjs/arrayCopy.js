@@ -4,12 +4,9 @@
  * Licensing: MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.arrayCopyTo = void 0;
 const tslib_1 = require("tslib");
 const array_init_1 = tslib_1.__importDefault(require("@tsdotnet/array-init"));
-const ArgumentNullException_1 = tslib_1.__importDefault(require("@tsdotnet/exceptions/dist/ArgumentNullException"));
-const ArgumentOutOfRangeException_1 = tslib_1.__importDefault(require("@tsdotnet/exceptions/dist/ArgumentOutOfRangeException"));
-/* eslint-disable no-inner-declarations */
+const exceptions_1 = require("@tsdotnet/exceptions");
 const CBN = 'Cannot be null.', CBL0 = 'Cannot be less than zero.';
 /**
  * Copies one array to another.
@@ -22,24 +19,24 @@ const CBN = 'Cannot be null.', CBL0 = 'Cannot be less than zero.';
  */
 function arrayCopyTo(source, destination, sourceIndex = 0, destinationIndex = 0, count = Infinity) {
     if (!source)
-        throw new ArgumentNullException_1.default('source', CBN);
+        throw new exceptions_1.ArgumentNullException('source', CBN);
     if (!destination)
-        throw new ArgumentNullException_1.default('destination', CBN);
+        throw new exceptions_1.ArgumentNullException('destination', CBN);
     if (sourceIndex < 0)
-        throw new ArgumentOutOfRangeException_1.default('sourceIndex', sourceIndex, CBL0);
+        throw new exceptions_1.ArgumentOutOfRangeException('sourceIndex', sourceIndex, CBL0);
     if (destinationIndex < 0)
-        throw new ArgumentOutOfRangeException_1.default('destinationIndex', destinationIndex, CBL0);
+        throw new exceptions_1.ArgumentOutOfRangeException('destinationIndex', destinationIndex, CBL0);
     const sourceLength = source.length;
     if (!sourceLength || count < 1)
         return destination;
     if (sourceIndex >= sourceLength)
-        throw new ArgumentOutOfRangeException_1.default('sourceIndex', sourceIndex, 'Must be less than the length of the source array.');
+        throw new exceptions_1.ArgumentOutOfRangeException('sourceIndex', sourceIndex, 'Must be less than the length of the source array.');
     // deal with ArrayLike issues.
     if (destination.length < 0)
-        throw new ArgumentOutOfRangeException_1.default('destination.length', destination.length, CBL0);
+        throw new exceptions_1.ArgumentOutOfRangeException('destination.length', destination.length, CBL0);
     const max = source.length - sourceIndex;
     if (isFinite(count) && count > max)
-        throw new ArgumentOutOfRangeException_1.default('sourceIndex', sourceIndex, 'Source index + length cannot exceed the length of the source array.');
+        throw new exceptions_1.ArgumentOutOfRangeException('sourceIndex', sourceIndex, 'Source index + length cannot exceed the length of the source array.');
     count = Math.min(count, max);
     const newLength = destinationIndex + count;
     if (newLength > destination.length)
@@ -49,7 +46,6 @@ function arrayCopyTo(source, destination, sourceIndex = 0, destinationIndex = 0,
     }
     return destination;
 }
-exports.arrayCopyTo = arrayCopyTo;
 /**
  * Creates a copy of the array-like object.
  * Similar to Array.slice(index, length).
@@ -63,21 +59,17 @@ function arrayCopy(source, sourceIndex = 0, count = Infinity) {
         return source; // may have passed zero? undefined? or null?
     return arrayCopyTo(source, (0, array_init_1.default)(Math.min(count, Math.max(source.length - sourceIndex, 0))), sourceIndex, 0, count);
 }
-// eslint-disable-next-line @typescript-eslint/no-namespace
-(function (arrayCopy) {
-    /**
-     * Copies one array to another.
-     * @param source
-     * @param destination
-     * @param sourceIndex
-     * @param destinationIndex
-     * @param length An optional limit to stop copying.
-     * @returns The destination array.
-     */
-    function to(source, destination, sourceIndex = 0, destinationIndex = 0, length = Infinity) {
-        return arrayCopyTo(source, destination, sourceIndex, destinationIndex, length);
-    }
-    arrayCopy.to = to;
-})(arrayCopy || (arrayCopy = {}));
+/**
+ * Copies one array to another.
+ * @param source
+ * @param destination
+ * @param sourceIndex
+ * @param destinationIndex
+ * @param length An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
+ * @returns The destination array.
+ */
+arrayCopy.to = function (source, destination, sourceIndex = 0, destinationIndex = 0, length = Infinity) {
+    return arrayCopyTo(source, destination, sourceIndex, destinationIndex, length);
+};
 exports.default = arrayCopy;
 //# sourceMappingURL=arrayCopy.js.map

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import arrayCopy from '../src/arrayCopy';
+import arrayCopy from '../src/arrayCopy.ts';
 
 function validate (source: any[]): void
 {
@@ -16,5 +16,28 @@ describe('arrayCopy', () => {
 	it('makes copies', () => {
 		validate([1, 2, 3, 4]);
 		validate(['a', 'b', 'c', 'd', 'e']);
+	});
+
+	it('has a .to method that works', () => {
+		const source = [1, 2, 3, 4, 5];
+		const destination: number[] = [];
+		
+		// This tests that TypeScript understands .to exists and compiles
+		const result = arrayCopy.to(source, destination);
+		
+		expect(result).to.equal(destination); // should return the destination array
+		expect(destination.length).to.equal(5);
+		expect(destination).to.deep.equal([1, 2, 3, 4, 5]);
+	});
+
+	it('has a .to method with partial copy', () => {
+		const source = [10, 20, 30, 40, 50];
+		const destination = [1, 2, 3, 4, 5, 6, 7];
+		
+		// Copy 3 elements from source starting at index 1 to destination starting at index 2
+		arrayCopy.to(source, destination, 1, 2, 3);
+		
+		// destination should be [1, 2, 20, 30, 40, 6, 7]
+		expect(destination).to.deep.equal([1, 2, 20, 30, 40, 6, 7]);
 	});
 });

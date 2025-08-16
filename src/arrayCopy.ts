@@ -3,12 +3,9 @@
  * Licensing: MIT
  */
 
-import {ArrayLikeWritable} from '@tsdotnet/common-interfaces';
+import type {ArrayLikeWritable} from '@tsdotnet/common-interfaces';
 import arrayInit from '@tsdotnet/array-init';
-import ArgumentNullException from '@tsdotnet/exceptions/dist/ArgumentNullException';
-import ArgumentOutOfRangeException from '@tsdotnet/exceptions/dist/ArgumentOutOfRangeException';
-
-/* eslint-disable no-inner-declarations */
+import { ArgumentNullException, ArgumentOutOfRangeException } from '@tsdotnet/exceptions';
 
 const
 	CBN  = 'Cannot be null.',
@@ -23,7 +20,7 @@ const
  * @param count An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
  * @returns The destination array.
  */
-export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
+function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
 	source: ArrayLike<T>,
 	destination: TDestination,
 	sourceIndex: number      = 0,
@@ -68,7 +65,6 @@ export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
 	return destination;
 }
 
-
 /**
  * Creates a copy of the array-like object.
  * Similar to Array.slice(index, length).
@@ -82,7 +78,7 @@ function arrayCopy<T> (
 	sourceIndex: number = 0,
 	count: number       = Infinity): T[]
 {
-	if(!source) return source as any; // may have passed zero? undefined? or null?
+	if(!source) return source as T[]; // may have passed zero? undefined? or null?
 	return arrayCopyTo(
 		source,
 		arrayInit<T>(Math.min(count, Math.max(source.length - sourceIndex, 0))),
@@ -92,28 +88,24 @@ function arrayCopy<T> (
 	);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
-namespace arrayCopy
+/**
+ * Copies one array to another.
+ * @param source
+ * @param destination
+ * @param sourceIndex
+ * @param destinationIndex
+ * @param length An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
+ * @returns The destination array.
+ */
+arrayCopy.to = function <T, TDestination extends ArrayLikeWritable<T>> (
+	source: ArrayLike<T>,
+	destination: TDestination,
+	sourceIndex: number      = 0,
+	destinationIndex: number = 0,
+	length: number           = Infinity
+): TDestination
 {
-	/**
-	 * Copies one array to another.
-	 * @param source
-	 * @param destination
-	 * @param sourceIndex
-	 * @param destinationIndex
-	 * @param length An optional limit to stop copying.
-	 * @returns The destination array.
-	 */
-	export function to<T, TDestination extends ArrayLikeWritable<T>> (
-		source: ArrayLike<T>,
-		destination: TDestination,
-		sourceIndex: number      = 0,
-		destinationIndex: number = 0,
-		length: number           = Infinity
-	): TDestination
-	{
-		return arrayCopyTo(source, destination, sourceIndex, destinationIndex, length);
-	}
-}
+	return arrayCopyTo(source, destination, sourceIndex, destinationIndex, length);
+};
 
 export default arrayCopy;
