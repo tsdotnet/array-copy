@@ -14,7 +14,7 @@ const CBN = 'Cannot be null.', CBL0 = 'Cannot be less than zero.';
  * @param count An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
  * @returns The destination array.
  */
-function arrayCopyTo(source, destination, sourceIndex = 0, destinationIndex = 0, count = Infinity) {
+export function arrayCopyTo(source, destination, sourceIndex = 0, destinationIndex = 0, count = Infinity) {
     if (!source)
         throw new ArgumentNullException('source', CBN);
     if (!destination)
@@ -56,17 +56,21 @@ function arrayCopy(source, sourceIndex = 0, count = Infinity) {
         return source; // may have passed zero? undefined? or null?
     return arrayCopyTo(source, arrayInit(Math.min(count, Math.max(source.length - sourceIndex, 0))), sourceIndex, 0, count);
 }
-/**
- * Copies one array to another.
- * @param source
- * @param destination
- * @param sourceIndex
- * @param destinationIndex
- * @param length An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
- * @returns The destination array.
- */
-arrayCopy.to = function (source, destination, sourceIndex = 0, destinationIndex = 0, length = Infinity) {
-    return arrayCopyTo(source, destination, sourceIndex, destinationIndex, length);
-};
+// eslint-disable-next-line @typescript-eslint/no-namespace
+(function (arrayCopy) {
+    /**
+     * Copies one array to another.
+     * @param source
+     * @param destination
+     * @param sourceIndex
+     * @param destinationIndex
+     * @param length An optional limit to stop copying.
+     * @returns The destination array.
+     */
+    function to(source, destination, sourceIndex = 0, destinationIndex = 0, length = Infinity) {
+        return arrayCopyTo(source, destination, sourceIndex, destinationIndex, length);
+    }
+    arrayCopy.to = to;
+})(arrayCopy || (arrayCopy = {}));
 export default arrayCopy;
 //# sourceMappingURL=arrayCopy.js.map
