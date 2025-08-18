@@ -1,10 +1,10 @@
-import {expect} from 'chai';
+import { describe, it, expect } from 'vitest';
 import arrayCopy from '../src/arrayCopy.ts';
 
 function validate (source: any[]): void
 {
 	const copy = arrayCopy(source);
-	expect(copy).not.equal(source);
+	expect(copy).not.toBe(source);
 	expect(copy.length).equal(source.length);
 	for(let i = 0; i<source.length; i++)
 	{
@@ -25,9 +25,9 @@ describe('arrayCopy', () => {
 		// This tests that TypeScript understands .to exists and compiles
 		const result = arrayCopy.to(source, destination);
 		
-		expect(result).to.equal(destination); // should return the destination array
-		expect(destination.length).to.equal(5);
-		expect(destination).to.deep.equal([1, 2, 3, 4, 5]);
+		expect(result).toBe(destination); // should return the destination array
+		expect(destination.length).toBe(5);
+		expect(destination).toEqual([1, 2, 3, 4, 5]);
 	});
 
 	it('has a .to method with partial copy', () => {
@@ -38,6 +38,6 @@ describe('arrayCopy', () => {
 		arrayCopy.to(source, destination, 1, 2, 3);
 		
 		// destination should be [1, 2, 20, 30, 40, 6, 7]
-		expect(destination).to.deep.equal([1, 2, 20, 30, 40, 6, 7]);
+		expect(destination).toEqual([1, 2, 20, 30, 40, 6, 7]);
 	});
 });

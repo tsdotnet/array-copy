@@ -59,6 +59,7 @@ export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
 
 	for(let i = 0; i<count; i++)
 	{
+		//@ts-expect-error Because there's a case where the source could have undefined values.
 		destination[destinationIndex + i] = source[sourceIndex + i];
 	}
 
