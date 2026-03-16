@@ -45,7 +45,7 @@ function arrayCopy(source, sourceIndex = 0, count = Infinity) {
     }
     arrayCopy.to = to;
 })(arrayCopy || (arrayCopy = {}));
-var arrayCopy$1 = arrayCopy;
+var arrayCopy_default = arrayCopy;
 
-export { arrayCopyTo, arrayCopy$1 as default };
+export { arrayCopyTo, arrayCopy_default as default };
 //# sourceMappingURL=arrayCopy.js.map
