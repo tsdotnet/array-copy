@@ -4,6 +4,10 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.tsdotnet = global.tsdotnet || {}, global.tsdotnet.arrayCopy = global.tsdotnet.arrayCopy || {}), global.tsdotnet.arrayInit, global.tsdotnet.exceptions));
 })(this, (function (exports, arrayInit, exceptions) { 'use strict';
 
+    function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+    var arrayInit__default = /*#__PURE__*/_interopDefault(arrayInit);
+
     /*!
      * @author electricessence / https://github.com/electricessence/
      * Licensing: MIT
@@ -40,7 +44,7 @@
     function arrayCopy(source, sourceIndex = 0, count = Infinity) {
         if (!source)
             return source;
-        return arrayCopyTo(source, arrayInit(Math.min(count, Math.max(source.length - sourceIndex, 0))), sourceIndex, 0, count);
+        return arrayCopyTo(source, arrayInit__default.default(Math.min(count, Math.max(source.length - sourceIndex, 0))), sourceIndex, 0, count);
     }
     (function (arrayCopy) {
         function to(source, destination, sourceIndex = 0, destinationIndex = 0, length = Infinity) {
