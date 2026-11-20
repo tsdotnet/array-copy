@@ -1,71 +1,47 @@
-# ![alt text](https://avatars1.githubusercontent.com/u/64487547?s=30 "tsdotnet") tsdotnet / array-copy
+![@tsdotnet/array-copy: Copy any array-like. A slice, or into a target.](https://cdn.jsdelivr.net/gh/tsdotnet/array-copy@master/assets/banner.svg)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/tsdotnet/array-copy/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@tsdotnet/array-copy.svg?style=flat-square)](https://www.npmjs.com/package/@tsdotnet/array-copy)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/tsdotnet/array-copy/blob/master/LICENSE)
 
-A commonly used array copy utility.
+Copy all or part of an array-like into a new array, or into an existing target.
+
+## Install
+
+```sh
+npm install @tsdotnet/array-copy
+```
+
+## Usage
+
+```ts
+import arrayCopy from '@tsdotnet/array-copy';
+
+const a = [10, 20, 30, 40, 50];
+
+arrayCopy(a);          // [10, 20, 30, 40, 50], a new array
+arrayCopy(a, 1, 3);    // [20, 30, 40]: from index 1, up to 3 items
+arrayCopy.to(a, [], 2); // [30, 40, 50]: into an existing target
+```
+
+Works on any array-like, such as `arguments` or typed arrays.
+
+## Use it from
+
+ESM (`import arrayCopy from '@tsdotnet/array-copy';`) or CommonJS (`const arrayCopy = require('@tsdotnet/array-copy').default;`).
+
+<details><summary>In a browser, without a bundler</summary>
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@tsdotnet/array-init@1/dist/umd/array-init.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tsdotnet/exceptions@1/dist/umd/exceptions.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tsdotnet/array-copy@1/dist/umd/array-copy.min.js"></script>
+<script>
+  const arrayCopy = tsdotnet.arrayCopy.default;
+</script>
+```
+
+</details>
 
 ## Docs
 
 [tsdotnet.github.io/array-copy](https://tsdotnet.github.io/array-copy/)
-
-## Usage
-
-```typescript
-import arrayCopy, {arrayCopyTo} from '@tsdotnet/array-copy'
-
-const myCopy = arrayCopy(source);
-// myCopy is really a shortcut for:
-const myOtherCopy = arrayCopyTo([]);
-```
-
-or
-
-```typescript
-import arrayCopy from '@tsdotnet/array-copy'
-
-const myOtherCopy = arrayCopy.to([]); // same as arrayCopyTo.
-```
-
-## Exported
-
-*For flexibility, these functions can operate on objects that have a length but are not instances of Array.* (`ArrayLikeWritable<T>`)
-
-### arrayCopyTo
-
-```typescript
-/**
- * Copies one array to another.
- * @param source
- * @param destination
- * @param sourceIndex
- * @param destinationIndex
- * @param count An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
- * @returns The destination array.
- */
-export function arrayCopyTo<T, TDestination extends ArrayLikeWritable<T>> (
-  source: ArrayLike<T>,
-  destination: TDestination,
-  sourceIndex: number      = 0,
-  destinationIndex: number = 0,
-  count: number           = Infinity
-): TDestination
-```
-
-### arrayCopy
-
-```typescript
-/**
- * Creates a copy of the array-like object.
- * Similar to Array.slice(index, length).
- * @param source
- * @param sourceIndex
- * @param count An optional limit to stop copying.  Finite values must be no more than the source.length minus the sourceIndex.
- * @returns The copy of the source array.
- */
-export default function arrayCopy<T> (
-  source: ArrayLike<T>,
-  sourceIndex: number = 0,
-  count: number      = Infinity
-): T[]
-```
