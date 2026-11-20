@@ -1,4 +1,4 @@
-![@tsdotnet/array-copy: Copy any array-like. A slice, or into a target.](https://cdn.jsdelivr.net/gh/tsdotnet/array-copy@master/assets/banner.svg)
+<a href="https://tsdotnet.github.io/array-copy/"><img src="https://cdn.jsdelivr.net/gh/tsdotnet/array-copy@master/assets/banner.svg" alt="@tsdotnet/array-copy: Copy any array-like. A slice, or into a target."></a>
 
 [![npm version](https://img.shields.io/npm/v/@tsdotnet/array-copy.svg?style=flat-square)](https://www.npmjs.com/package/@tsdotnet/array-copy)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/tsdotnet/array-copy/blob/master/LICENSE)
